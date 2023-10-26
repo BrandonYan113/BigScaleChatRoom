@@ -1,0 +1,93 @@
+# MOT20 yaml
+NAMES:
+  NAME: MOT20_WITH_ASSOCIATION
+
+PATHS:
+  DATASET: "D://BanYanDeng/MOTDataset"
+  MODEL_SAVE_DIR: "../output/models/MOT20_WITH_ASSOCIATION"
+  RESULT_ROOT: "../output/results/MOT20_WITH_ASSOCIATION"
+  EVAL_ROOT: "../output/evaluation/MOT20_WITH_ASSOCIATION"
+
+WARMUP:
+  SUBNET: ['backbone', 'detect_head', 'level_split', 'adaptive_head', 'attribution_head']
+  EPOCHS: 3
+  MAX_LR: 0.000258
+  LR_GAMMA: 0.5
+  OPTIM_NAME: "Adam"  # "SGD" or "Adam"
+  LR_SCHEDULER: 'MultiStep'  # 'OneCycle' or 'MultiStep'
+  LR_MILESTONES: [2, 4, 8]  # 'MultiStep' LR scheduler Milestone
+  GRAD_CLIP: 3.
+  DIV_FACTOR: 5    # 'OneCycle' LR scheduler parameter
+  FINAL_DIV_FACTOR: 10     # 'OneCycle' LR scheduler parameter
+  PCT_START: 0.2
+  MOMENTUM: 0.937
+  WEIGHT_DECAY: 0.00058
+
+TRAINING:
+  # data setting
+  BATCH_SIZE: 4
+  WORKERS: 0
+  SPLIT_LEN: 6
+  SPLIT_BATCH_SIZE: 1
+  # super parameters
+  EPOCHS: 15
+  MAX_LR: 0.000258
+  LR_MILESTONES: [2, 4, 8, 16]
+  WEIGHT_DECAY: 0.00058
+  DIV_FACTOR: 10
+  FINAL_DIV_FACTOR: 20
+  LR_GAMMA: 0.7
+  MOMENTUM: 0.937
+
+  # Model setting
+  BACKBONE_NAME: "dla"  # "default", "resnet18", " resnet34", 'dla'
+  BOX_NUM: 3  # Detect boxes number of every point
+  SUBNET: ['backbone', 'detect_head', 'level_split', 'adaptive_head', 'attribution_head']
+  BRIDGE_KERNEL: []
+
+  # pre-transform
+  IMG_MEAN: [0., 0., 0.]
+  IMG_STD: [1., 1., 1.]
+  IMG_MIN_SIZE: [544, 608, 672, 704]
+  IMG_MAX_SIZE: 1248
+  MIN_AREA: 100.   # filter targets less than 16. * 16. in size
+  LEVEL_NUM: 2
+  LEVEL_CHANNEL: 256
+  SAVE_LEVELS: True
+  SUBNET_MODE: WITH_ASSOCIATION
+  ROTATION_MAX_ANGLE: 10.
+  ROTATION_MIN_SCALE: 0.75
+  HGAIN: 0.015
+  VGAIN: 0.7
+  SGAIN: 0.4
+  SPLIT_LEVEL_BY_VIS: False
+
+  # Label setting
+  BOX_LABEL_FUNC: default   # default, patch
+  LABEL_MIN_OVERLAP_RATIO: 0.7
+  # loss setting
+  HEAT_MAP_LOSS:
+    LOSS_FUNC: focal  # focal, MSE
+    FOCAL_ALPHA: 0.
+    FOCAL_BASE_ALPHA: 0.4
+    BASE_WEIGHT: 1.  # loss weight
+
+  BOX_LOSS:
+    BASE_WEIGHT: 1.
+    EPS: 1e-5
+
+  MEMORY_LOSS:
+    BASE_ALPHA: 0.4
+    FOCAL_ALPHA: 'adaptive'
+    BASE_WEIGHT: 1.  # loss weight
+
+  # other
+  PRINT_FREQ: 100
+  VISUAL_FREQ: 100
+  SAVE_FREQ: 5
+  RANDOM_SEED: 19990320
+  ENABLE_AUTOCAST: True   # True, False
+  SCALE_FACTOR: 16  # backbone down sample rate
+  CLAMP_EPS: 1e-5
+
+

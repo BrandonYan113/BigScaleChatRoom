@@ -1,0 +1,9 @@
+{
+  "root": "D:/data",
+  "train": {
+    "danceTrackTrain2": {
+      "train": "src/data/danceTrackTrain2.train",
+      "mask": "D:/A"
+    }
+  }
+}

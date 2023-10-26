@@ -1,0 +1,13 @@
+{
+  "root": "D:/data",
+  "train": {
+    "mot17": {
+      "train": "src/data/mot17.half",
+      "mask": "D:/A/MOTDataset"
+    },
+    "mot20": {
+      "train": "src/data/mot20.half",
+      "mask": "D:/A/MOTDataset"
+    }
+  }
+}

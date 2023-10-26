@@ -1,0 +1,27 @@
+{
+  "root": "D:/data",
+  "train": {
+    "crowdhuman": {
+      "train": "src/data/crowdhuman.train",
+      "mask": "D:/BanYanDeng/CrowdHuman"
+    },
+    "mot17": {
+      "train": "src/data/mot17.train",
+      "mask": "D:/BanYanDeng/MOTDataset"
+    },
+    "mot16": {
+      "train": "src/data/mot16.train",
+      "mask": "D:/BanYanDeng/MOTDataset"
+    },
+    "mot20": {
+      "train": "src/data/mot20.train",
+      "mask": "D:/BanYanDeng/MOTDataset"
+    }
+  },
+  "test_emb": {
+    "mot15": "src/data/mot15.val"
+  },
+  "test": {
+    "mot15": "src/data/mot15.val"
+  }
+}

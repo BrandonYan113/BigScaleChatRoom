@@ -1,0 +1,9 @@
+{
+  "root": "D:/data",
+  "train": {
+    "mot20": {
+      "train": "src/data/mot20.half",
+      "mask": "D:/A/MOTDataset"
+    }
+  }
+}

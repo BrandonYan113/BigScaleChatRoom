@@ -1,0 +1,99 @@
+#Crowd Human yaml
+NAMES:
+  NAME: CROWD_HUMAN
+
+PATHS:
+  DATASET: "D://BanYanDeng/CrowdHuman"
+  MODEL_SAVE_DIR: "../output/models/CROWD_HUMAN_WITH_LAYERING"
+  RESULT_ROOT: "../output/results/CROWD_HUMAN_LAYERING"
+  EVAL_ROOT: "../output/evaluation/CROWD_HUMAN_LAYERING"
+
+WARMUP:
+  SUBNET: ['backbone', 'detect_head', 'level_split']
+  EPOCHS: 0
+  MAX_LR: 0.001
+  LR_GAMMA: 0.5
+  STEP_SIZE: 1
+  OPTIM_NAME: "Adam"  # "SGD" or "Adam"
+  LR_SCHEDULER: 'MultiStep'  # 'OneCycle' or 'MultiStep'
+  LR_MILESTONES: [2, 4, 8]  # 'MultiStep' LR scheduler Milestone
+  GRAD_CLIP: 3.
+  DIV_FACTOR: 5    # 'OneCycle' LR scheduler parameter
+  FINAL_DIV_FACTOR: 10     # 'OneCycle' LR scheduler parameter
+  PCT_START: 0.3
+  MOMENTUM: 0.937
+  WEIGHT_DECAY: 0.00058
+
+TRAINING:
+  # data setting
+  BATCH_SIZE: 4
+  WORKERS: 0
+  SPLIT_LEN: 1
+  SPLIT_BATCH_SIZE: 1
+
+  # super parameters
+  EPOCHS: 30
+  MAX_LR: 0.0001258
+  LR_MILESTONES: [2, 4, 6, 8]
+  WEIGHT_DECAY: 0.000258
+  OPTIM_NAME: "Adam"  # "SGD" or "Adam"
+  LR_SCHEDULER: StepLR  # 'OneCycle' or 'MultiStep' or 'StepLR'
+  GRAD_CLIP: 3.
+  DIV_FACTOR: 20
+  FINAL_DIV_FACTOR: 100
+  PCT_START: 0.3
+  LR_GAMMA: 0.15
+  STEP_SIZE: 2
+  MOMENTUM: 0.93
+
+  # Model setting
+  BACKBONE_NAME: "dla"  # "default", "resnet18", " resnet34", "dla"
+  BOX_NUM: 3  # Detect boxes number of every point
+  BRIDGE_KERNEL: [3, 1, 3]
+  # Choose subnet of the model to train, please refer to nets.StrongModel.StrongModel
+  # to learn more about the subnets available in the model
+  SUBNET: ['backbone', 'detect_head', 'level_split']
+
+  # pre-transform
+  IMG_MEAN: [0., 0., 0.]  #[0.485, 0.456, 0.406]
+  IMG_STD: [1., 1., 1.]   #[0.229, 0.224, 0.225]
+  IMG_MIN_SIZE: [512, 576, 640, 704]
+  IMG_MAX_SIZE: 1280
+  MIN_AREA: 256.   # filter targets less than 16. * 16. in size
+  LEVEL_NUM: 2    # number of level detect, fixed
+  SAVE_LEVELS: True
+  LEVEL_CHANNEL: 256
+  SUBNET_MODE: WITH_LAYERING
+  SPLIT_LEVEL_BY_VIS: False
+  ROTATION_MAX_ANGLE: 12.
+  ROTATION_MIN_SCALE: 0.8
+  HGAIN: 0.0188
+  VGAIN: 0.72
+  SGAIN: 0.4
+
+  # Label setting
+  LABEL_RADIUS: 0
+  BOX_LABEL_FUNC: default   # default, patch
+
+  # loss setting
+  HEAT_MAP_LOSS:
+    LOSS_FUNC: focal  # focal, MSE
+    FOCAL_ALPHA: 0.  # -1: (pos_num / total_num, neg_num / total_num)
+    # The larger the beta value, the lower the value obtained by the points near the target center.
+    # the value of center point always 1., beta punish the points neighbored by center point
+    BASE_WEIGHT: 1.  # loss weight
+    FOCAL_BASE_ALPHA: 0.15
+
+  BOX_LOSS:
+    BASE_WEIGHT: 1.2   # loss weight
+    EPS: 1e-5
+
+  # other
+  PRINT_FREQ: 100
+  VISUAL_FREQ: 100
+  SAVE_FREQ: 5
+  RANDOM_SEED: 1999320
+  ENABLE_AUTOCAST: True   # True, False
+  SCALE_FACTOR: 16  # backbone down sample rate
+  GRADIENT_ACU_FRQ: 8   # gradient accumulate frequency
+
