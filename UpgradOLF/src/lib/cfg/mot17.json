@@ -1,9 +1,0 @@
-{
-  "root": "D:/data",
-  "train": {
-    "mot17": {
-      "train": "src/data/mot17.train",
-      "mask": "D:/BanYanDeng/MOTDataset"
-    }
-  }
-}

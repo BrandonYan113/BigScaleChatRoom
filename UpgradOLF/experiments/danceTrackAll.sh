@@ -1,2 +1,0 @@
-cd src
-python train.py --task mot --exp_id danceTrack_All_middle_arch1_with_memory_net --arch_scale middle_ --gpus 0 --pretrained True --load_model ..\\exp/mot/crowdhuman_middle_arch1/model_last.pth --num_epochs 20 --lr_step 25 --data_cfg ../src/lib/cfg/danceTrackAll.json --level_num 2 --conf_thres 0.3 --id_weight 0.4 --wh_weight 0.5 --input_type image --lr 1e-4 --batch_size 10 --print_or_show_iter 100
